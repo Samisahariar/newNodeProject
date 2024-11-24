@@ -10,8 +10,12 @@ const createStudent = async (req: Request, res: Response) => {
       message: 'the data is succesfully received !!',
       data: result,
     });
-  } catch (err) {
-    console.log(err);
+  } catch (err: any) {
+    res.status(401).json({
+      success: false,
+      message: err.message || 'something worng ins this secviton',
+      error: err,
+    });
   }
 };
 
@@ -35,7 +39,7 @@ const getSingleStudentInfo = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: 'the singledata is succesfully rethrived !!',
-      data: result
+      data: result,
     });
   } catch (error) {}
 };

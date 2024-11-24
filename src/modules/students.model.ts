@@ -1,16 +1,27 @@
-import { Schema, model } from 'mongoose';
+import { Model, Schema, model } from 'mongoose';
 import {
   Students,
   LocalGuardian,
-  UserName,
   Guardian,
+  StudentName,
+  StudentModel,
 } from './students/students.interface';
+import validator from 'validator';
+import { StudentModel } from './students/students.interface';
 
-const userNameSchema = new Schema<UserName>({
+const studentNameSchema = new Schema<StudentName>({
   firstName: {
     trim: true,
     type: String,
     required: [true, 'First name is required'],
+    validate: {
+      validator: function (value) {
+        const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
+        return value === capitalizedValue;
+      },
+      message:
+        '{VALUE} is not appropiate cause this is not supporting format !!!',
+    },
   },
   middleName: {
     type: String,
@@ -19,6 +30,10 @@ const userNameSchema = new Schema<UserName>({
   lastName: {
     type: String,
     required: [true, 'Last name is required'],
+    validate: {
+      validator: (value: string) => validator.isAlpha(value),
+      message: '{VALUE} is no valid !!',
+    },
   },
 });
 
@@ -29,7 +44,7 @@ const localGuardianSchema = new Schema<LocalGuardian>({
   },
   localGuardianNo: {
     type: String,
-    required: true,,
+    required: true,
   },
   localGuardianAdd: {
     type: String,
@@ -64,13 +79,13 @@ const guardianSchema = new Schema<Guardian>({
   },
 });
 
-const studentSchema = new Schema<Students>({
+const studentSchema = new Schema<Students, StudentModel>({
   id: {
     type: String,
     required: [true, 'Student ID is required'],
   },
   name: {
-    type: userNameSchema,
+    type: studentNameSchema,
     required: [true, 'Name is required'],
   },
   gender: {
@@ -85,6 +100,10 @@ const studentSchema = new Schema<Students>({
   email: {
     type: String,
     required: [true, 'Email is required'],
+    validate: {
+      validator: (value: string) => validator.isEmail(value),
+      message: '{VALUE} is not a perfect email !!',
+    },
   },
   permanentAdd: {
     type: String,
@@ -105,7 +124,7 @@ const studentSchema = new Schema<Students>({
   },
   emergencyContactNo: {
     type: String,
-    required: true
+    required: true,
   },
   localGuardian: {
     type: localGuardianSchema,
@@ -126,6 +145,15 @@ const studentSchema = new Schema<Students>({
   },
 });
 
-const StudentModel = model<Students>('student', studentSchema);
+//instance method are used here forr all the time
+/* studentSchema.methods.isStudentExists = async function (id : string){
+    const result = await TStudentModel.findOne({id})
+    return result
+} */
+studentSchema.statics.isExistsStudent = async (id: string) => {
+  const result = await TStudentModel.findOne({ id });
+  return result;
+};
 
-export default StudentModel;
+const TStudentModel = model<Students, StudentModel>('student', studentSchema);
+export default TStudentModel;
