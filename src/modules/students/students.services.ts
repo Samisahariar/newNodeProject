@@ -4,11 +4,13 @@ import { error } from 'console';
 
 const createStudentIntoDb = async (studentdata: Students) => {
   /* const result = await StudentModel.create(student); */
-
-
-    if(await TStudentModel.isExistsStudent(studentdata.id)){
-        throw Error("the use is already exists in this database !!!")
-    }
+  const StudentIns = new TStudentModel();
+  if (await TStudentModel.isExistsStudent(String(studentdata.id))) {
+    throw Error('the use is already exists in this database !!!');
+  } else {
+    const result = await TStudentModel.create(studentdata);
+    return result;
+  }
 };
 
 const getAlltheStudents = async () => {

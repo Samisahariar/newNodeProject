@@ -52,7 +52,8 @@ export type StudentName = {
 };
 
 export type Students = {
-  id: string;
+  id: { type: string; required: true };
+  password: { type: string;  max: 20 };
   name: StudentName;
   dateofBirth: string;
   email: string;
@@ -76,7 +77,5 @@ export type Students = {
 //static method and the requirement in the interface;
 
 export interface StudentModel extends Model<Students> {
-
   isExistsStudent(id: string): Promise<Students>;
-
 }

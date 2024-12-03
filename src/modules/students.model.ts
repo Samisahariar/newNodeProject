@@ -1,4 +1,5 @@
 import { Model, Schema, model } from 'mongoose';
+import bcrypt from 'bcrypt';
 import {
   Students,
   LocalGuardian,
@@ -7,7 +8,7 @@ import {
   StudentModel,
 } from './students/students.interface';
 import validator from 'validator';
-import { StudentModel } from './students/students.interface';
+import config from '../config';
 
 const studentNameSchema = new Schema<StudentName>({
   firstName: {
@@ -84,6 +85,10 @@ const studentSchema = new Schema<Students, StudentModel>({
     type: String,
     required: [true, 'Student ID is required'],
   },
+  password: {
+    type: String,
+    max: 20,
+  },
   name: {
     type: studentNameSchema,
     required: [true, 'Name is required'],
@@ -96,6 +101,7 @@ const studentSchema = new Schema<Students, StudentModel>({
   dateofBirth: {
     type: String,
     required: [true, 'Date of birth is required'],
+    max: 20,
   },
   email: {
     type: String,
@@ -150,6 +156,19 @@ const studentSchema = new Schema<Students, StudentModel>({
     const result = await TStudentModel.findOne({id})
     return result
 } */
+
+studentSchema.pre('save', async function (next) {
+  const user = this
+  user.password = await bcrypt.hash(user.password, Number(config.salt_rounds));
+  next();
+});
+
+studentSchema.post('save', function (doc, next) {
+  doc.password = "";
+  next()
+});
+
+//static method is declared down below and a fuck all of this !!
 studentSchema.statics.isExistsStudent = async (id: string) => {
   const result = await TStudentModel.findOne({ id });
   return result;

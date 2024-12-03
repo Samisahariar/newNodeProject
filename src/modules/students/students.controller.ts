@@ -7,7 +7,7 @@ const createStudent = async (req: Request, res: Response) => {
     const result = await studentServices.createStudentIntoDb(student);
     res.status(200).json({
       success: true,
-      message: 'the data is succesfully received !!',
+      message: 'the data is succesfully inserted dont worry !!',
       data: result,
     });
   } catch (err: any) {
