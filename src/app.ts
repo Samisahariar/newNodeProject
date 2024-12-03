@@ -18,9 +18,12 @@ app.use(cors());
 app.use('/api/v1/students', StudentRouters);
 
 app.get('/', (req: Request, res: Response) => {
-  const a = 10;
 
-  res.send(a);
+
+  res.json({
+    message : "welcome to the University Server !!"
+  });
 });
+app
 
 export default app;

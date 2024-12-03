@@ -8,7 +8,7 @@
     "lint": "eslint src .",
     "format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
     "prettier:fix": "npx prettier --write src",
-    "build" : "tsc -w"
+    "build": "tsc -w"
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +21,8 @@
     "express": "^4.21.1",
     "mongoose": "^8.8.2",
     "nodemon": "^3.1.7",
-    "validator": "^13.12.0"
+    "validator": "^13.12.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
