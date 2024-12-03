@@ -1,5 +1,5 @@
 import { Students } from './students.interface';
-import TStudentModel from '../students.model';
+import TStudentModel from "./students.model";
 import { error } from 'console';
 
 const createStudentIntoDb = async (studentdata: Students) => {

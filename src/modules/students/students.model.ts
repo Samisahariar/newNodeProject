@@ -6,9 +6,9 @@ import {
   Guardian,
   StudentName,
   StudentModel,
-} from './students/students.interface';
+} from "./students.interface";
 import validator from 'validator';
-import config from '../config';
+import config from '../../config';
 
 const studentNameSchema = new Schema<StudentName>({
   firstName: {
@@ -158,13 +158,14 @@ const studentSchema = new Schema<Students, StudentModel>({
 } */
 
 studentSchema.pre('save', async function (next) {
-  const user = this
+  const user : Record<string, any> = this
   user.password = await bcrypt.hash(user.password, Number(config.salt_rounds));
   next();
 });
 
 studentSchema.post('save', function (doc, next) {
-  doc.password = "";
+  const user : Record<string, any> = doc
+  user.password = "";
   next()
 });
 

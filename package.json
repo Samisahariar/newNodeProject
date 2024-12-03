@@ -7,7 +7,8 @@
     "start:dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "lint": "eslint src .",
     "format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
-    "prettier:fix": "npx prettier --write src"
+    "prettier:fix": "npx prettier --write src",
+    "build" : "tsc -w"
   },
   "author": "",
   "license": "ISC",
