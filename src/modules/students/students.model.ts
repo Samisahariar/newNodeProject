@@ -37,6 +37,7 @@ const studentNameSchema = new Schema<StudentName>({
   },
 });
 
+
 const localGuardianSchema = new Schema<LocalGuardian>({
   localGuardianName: {
     type: String,
@@ -168,11 +169,15 @@ studentSchema.post('save', function (doc, next) {
   next();
 });
 
+
+
 //static method is declared down below and a fuck all of this !!
 studentSchema.statics.isExistsStudent = async (id: string) => {
   const result = await TStudentModel.findOne({ id });
   return result;
 };
+
+
 
 const TStudentModel = model<StudentsInterface, StudentModel>(
   'student',
