@@ -12,14 +12,10 @@ async function main() {
   try {
     await mongoose.connect(config.databaseUrl as string);
     console.log('successfully connect moongoose');
-  } catch {}
+    app.listen(config.port, () => {
+      console.log(`this port is runnig on the ${config.port}`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
-
-const bootloader = () => {
-  const mainServer: Server = app.listen(config.port, () => {
-    console.log(`this port is runnig on the ${config.port}`);
-  });
-};
-
-main();
-bootloader();

@@ -6,4 +6,7 @@ export type TUser = {
   status: boolean;
   isDeleted: boolean;
 };
+
+
+
 export default TUser;

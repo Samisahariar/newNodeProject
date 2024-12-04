@@ -1,12 +1,11 @@
-import { Model, Schema, model } from 'mongoose';
+import { Model, Schema, Types, model } from 'mongoose';
 import bcrypt from 'bcrypt';
-import {
-  Students,
+import StudentsInterface, {
   LocalGuardian,
   Guardian,
   StudentName,
   StudentModel,
-} from "./students.interface";
+} from './students.interface';
 import validator from 'validator';
 import config from '../../config';
 
@@ -80,7 +79,7 @@ const guardianSchema = new Schema<Guardian>({
   },
 });
 
-const studentSchema = new Schema<Students, StudentModel>({
+const studentSchema = new Schema<StudentsInterface, StudentModel>({
   id: {
     type: String,
     required: [true, 'Student ID is required'],
@@ -88,6 +87,11 @@ const studentSchema = new Schema<Students, StudentModel>({
   password: {
     type: String,
     max: 20,
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    required: [true, "this field is required for the futher user and write !"],
+    ref: "UserModel"
   },
   name: {
     type: studentNameSchema,
@@ -140,11 +144,6 @@ const studentSchema = new Schema<Students, StudentModel>({
     type: guardianSchema,
     required: [true, 'Guardian information is required'],
   },
-  status: {
-    type: String,
-    enum: ['active', 'inactive'],
-    required: [true, 'Status is required'],
-  },
   profileImg: {
     type: String,
     required: true,
@@ -158,15 +157,15 @@ const studentSchema = new Schema<Students, StudentModel>({
 } */
 
 studentSchema.pre('save', async function (next) {
-  const user : Record<string, any> = this
+  const user: Record<string, any> = this;
   user.password = await bcrypt.hash(user.password, Number(config.salt_rounds));
   next();
 });
 
 studentSchema.post('save', function (doc, next) {
-  const user : Record<string, any> = doc
-  user.password = "";
-  next()
+  const user: Record<string, any> = doc;
+  user.password = '';
+  next();
 });
 
 //static method is declared down below and a fuck all of this !!
@@ -175,5 +174,8 @@ studentSchema.statics.isExistsStudent = async (id: string) => {
   return result;
 };
 
-const TStudentModel = model<Students, StudentModel>('student', studentSchema);
+const TStudentModel = model<StudentsInterface, StudentModel>(
+  'student',
+  studentSchema,
+);
 export default TStudentModel;

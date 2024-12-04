@@ -1,23 +1,7 @@
 import { Request, Response } from 'express';
 import { studentServices } from './students.services';
 
-const createStudent = async (req: Request, res: Response) => {
-  try {
-    const { student } = req.body;
-    const result = await studentServices.createStudentIntoDb(student);
-    res.status(200).json({
-      success: true,
-      message: 'the data is succesfully inserted dont worry !!',
-      data: result,
-    });
-  } catch (err: any) {
-    res.status(401).json({
-      success: false,
-      message: err.message || 'something worng ins this secviton',
-      error: err,
-    });
-  }
-};
+
 
 const getAllStudentCon = async (req: Request, res: Response) => {
   try {
@@ -45,7 +29,7 @@ const getSingleStudentInfo = async (req: Request, res: Response) => {
 };
 
 export const studentController = {
-  createStudent,
+
   getAllStudentCon,
   getSingleStudentInfo,
 };

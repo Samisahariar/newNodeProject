@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 import { Request, Response } from 'express';
 import cors from 'cors';
 import { StudentRouters } from './modules/students/students.routers';
+import { UserRoute } from './modules/users/user.route';
 
 const app: Application = express();
 app.use(express.text());
@@ -16,10 +17,9 @@ app.use(cors());
 
 //application apis are all here and we are calling it through it
 app.use('/api/v1/students', StudentRouters);
+app.use('/user', UserRoute)
 
 app.get('/', (req: Request, res: Response) => {
-
-
   res.json({
     message : "welcome to the University Server !!"
   });

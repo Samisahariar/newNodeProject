@@ -1,4 +1,4 @@
-import { Schema, model, connect, Model } from 'mongoose';
+import { Schema, model, connect, Model, Types } from 'mongoose';
 
 export type Guardian = {
   fatherName: {
@@ -51,9 +51,10 @@ export type StudentName = {
   };
 };
 
-export type Students = {
+export type StudentsInterface = {
   id: { type: string; required: true };
   password: { type: string;  max: 20 };
+  user :  Types.ObjectId;
   name: StudentName;
   dateofBirth: string;
   email: string;
@@ -65,7 +66,6 @@ export type Students = {
   emergencyContactNo: string;
   localGuardian: LocalGuardian;
   guardian: Guardian;
-  status: 'active' | 'inactive';
   profileImg?: string;
 };
 //instance method are all of these and we are work here for that reason !!
@@ -76,6 +76,8 @@ export type Students = {
 
 //static method and the requirement in the interface;
 
-export interface StudentModel extends Model<Students> {
-  isExistsStudent(id: string): Promise<Students>;
+export default StudentsInterface
+
+export interface StudentModel extends Model<StudentsInterface> {
+  isExistsStudent(id: string): Promise<StudentsInterface>;
 }
