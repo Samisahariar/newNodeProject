@@ -2,7 +2,7 @@ import config from '../../config';
 import StudentsInterface from '../students/students.interface';
 import UserModel from './user.models';
 import userModel from './user.models';
-import TUser, { NewUser } from './users.interface';
+import TUser from './users.interface';
 import { StudentModel } from '../students/students.interface';
 import TStudentModel from '../students/students.model';
 

@@ -7,7 +7,7 @@ const studentNameSchema = z.object({
   firstName: z
     .string()
     .trim()
-    .
+    .min(1, "first Name is Required !!")
     .refine(
       (value) => value.charAt(0) === value.charAt(0).toUpperCase(),
       { message: "First name must start with a capital letter" }

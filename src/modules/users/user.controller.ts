@@ -4,7 +4,11 @@ import { Request, Response } from 'express';
 
 const createUser = async (req: Request, res: Response) => {
   try {
+    console.log(req.body)
     const { passowrd, student } = req.body;
+    console.log(passowrd)
+
+    console.log(student)
 
     const result = await userServices.createStudentIntoDb(passowrd, student);
 
