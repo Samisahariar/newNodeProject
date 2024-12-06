@@ -1,32 +1,31 @@
 import { userServices } from './user.services';
 import StudentsInterface from '../students/students.interface';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import sendResponse from '../../app/utils/serverResponse';
 
-const createUser = async (req: Request, res: Response) => {
+const createUser = async (req: Request, res: Response, next:NextFunction) => {
   try {
-    console.log(req.body)
-    const { passowrd, student } = req.body;
-    console.log(passowrd)
+    const { password, student } = req.body;
+    const result = await userServices.createStudentIntoDb(password, student);
 
-    console.log(student)
-
-    const result = await userServices.createStudentIntoDb(passowrd, student);
-
-    res.status(200).json({
-        success : true,
-        message : "user created Successfully",
-        data : result
+    sendResponse(res, {
+      success : true,
+      status : 200,
+      message : "data is received succesfully !",
+      data : result
     })
+
+    
   } catch (err: any) {
-    res.status(401).json({
+    /* res.status(401).json({
       success: false,
       message: err.message || 'something worng ins this secviton',
       error: err,
-    });
+    }); */
+    next(err);
   }
 };
 
-
 export const UserController = {
-  createUser
-}
+  createUser,
+};

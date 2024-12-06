@@ -1,4 +1,4 @@
-import config from '../../config';
+import config from '../../app/config';
 import StudentsInterface from '../students/students.interface';
 import UserModel from './user.models';
 import userModel from './user.models';
@@ -7,7 +7,7 @@ import { StudentModel } from '../students/students.interface';
 import TStudentModel from '../students/students.model';
 
 const createStudentIntoDb = async (
-  password,
+  password: string,
   studentdata: StudentsInterface,
 ) => {
   /* const result = await StudentModel.create(student); */

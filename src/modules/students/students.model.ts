@@ -1,5 +1,4 @@
 import { Model, Schema, Types, model } from 'mongoose';
-import bcrypt from 'bcrypt';
 import StudentsInterface, {
   LocalGuardian,
   Guardian,
@@ -7,7 +6,7 @@ import StudentsInterface, {
   StudentModel,
 } from './students.interface';
 import validator from 'validator';
-import config from '../../config';
+import config from '../../app/config';
 
 const studentNameSchema = new Schema<StudentName>({
   firstName: {
@@ -36,7 +35,6 @@ const studentNameSchema = new Schema<StudentName>({
     },
   },
 });
-
 
 const localGuardianSchema = new Schema<LocalGuardian>({
   localGuardianName: {
@@ -85,14 +83,11 @@ const studentSchema = new Schema<StudentsInterface, StudentModel>({
     type: String,
     required: [true, 'Student ID is required'],
   },
-  password: {
-    type: String,
-    max: 20,
-  },
   user: {
     type: Schema.Types.ObjectId,
-    required: [true, "this field is required for the futher user and write !"],
-    ref: "UserModel"
+    required: [true, 'this field is required for the futher user and write !'],
+    unique: true,
+    ref: 'UserModel',
   },
   name: {
     type: studentNameSchema,
@@ -157,27 +152,11 @@ const studentSchema = new Schema<StudentsInterface, StudentModel>({
     return result
 } */
 
-studentSchema.pre('save', async function (next) {
-  const user: Record<string, any> = this;
-  user.password = await bcrypt.hash(user.password, Number(config.salt_rounds));
-  next();
-});
-
-studentSchema.post('save', function (doc, next) {
-  const user: Record<string, any> = doc;
-  user.password = '';
-  next();
-});
-
-
-
 //static method is declared down below and a fuck all of this !!
 studentSchema.statics.isExistsStudent = async (id: string) => {
   const result = await TStudentModel.findOne({ id });
   return result;
 };
-
-
 
 const TStudentModel = model<StudentsInterface, StudentModel>(
   'student',

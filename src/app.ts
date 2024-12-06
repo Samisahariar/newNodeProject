@@ -1,29 +1,30 @@
-import express, { Application } from 'express';
-import { Request, Response } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
-import { StudentRouters } from './modules/students/students.routers';
-import { UserRoute } from './modules/users/user.route';
+import router from './app/routes';
 
 const app: Application = express();
 app.use(express.text());
 app.use(express.json());
 app.use(cors());
 
-/* const getthedata = (req: Request, res: Response) => {
-  console.log(
-    'the data is here and all of the data is here awe are all here and there !!',
-  );
-}; */
+app.use("/api", router)
 
-//application apis are all here and we are calling it through it
-app.use('/api/v1/students', StudentRouters);
-app.use('/user', UserRoute)
 
-app.get('/', (req: Request, res: Response) => {
-  res.json({
-    message : "welcome to the University Server !!"
+app.use(((err: any, req: Request, res: Response, next: NextFunction)=> {
+  const statusCode = err.status || 500;
+  const message =  'something went worng in the app.ts!';
+
+  res.status(statusCode).json({
+    success: false,
+    message,
+    error: err,
   });
-});
-app
+}) as express.ErrorRequestHandler);
+
+
+const test = (req : Request, res : Response) =>{
+  res.send("the appp is runnig on and on still now !")
+}
+app.get("/", test)
 
 export default app;

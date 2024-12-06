@@ -1,9 +1,9 @@
 import express from "express"
-import { Router } from 'express';
 import { UserController } from "./user.controller";
+import { Router } from "express";
 
 
-const router = express.Router()
+const router = Router();
 
 router.post("/create-student", UserController.createUser)
 
