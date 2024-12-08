@@ -1,5 +1,8 @@
+
 export type TAcademicSemesterName = "Autumn" | "Summmer" | "Fall";
+
 export type TAcademicSemesterCode = "01" | "02" | "03";
+
 export type TMonths =
   | 'January'
   | 'February'
