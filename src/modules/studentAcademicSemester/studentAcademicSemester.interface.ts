@@ -1,7 +1,6 @@
+export type TAcademicSemesterName = 'Autumn' | 'Summer' | 'Fall';
 
-export type TAcademicSemesterName = "Autumn" | "Summmer" | "Fall";
-
-export type TAcademicSemesterCode = "01" | "02" | "03";
+export type TAcademicSemesterCode = '01' | '02' | '03';
 
 export type TMonths =
   | 'January'
@@ -18,13 +17,11 @@ export type TMonths =
   | 'December';
 
 export type TAcademicSemester = {
-    name : TAcademicSemesterName,
-    code : TAcademicSemesterCode,
-    year : string
-    startMonth : TMonths,
-    endMonth : TMonths
-}
+  name: TAcademicSemesterName;
+  code: TAcademicSemesterCode;
+  year: string;
+  startMonth: TMonths;
+  endMonth: TMonths;
+};
 
-export default TAcademicSemester
-
-
+export default TAcademicSemester;
