@@ -1,6 +1,6 @@
 import { Request, RequestHandler, Response } from 'express';
 import { studentServices } from './students.services';
-import sendResponse from '../../app/utils/serverResponse';
+import sendResponse from '../../utils/serverResponse';
 import { NextFunction } from 'express-serve-static-core';
 
 const catchAsync = (fn: RequestHandler) => {

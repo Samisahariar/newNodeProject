@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
-import sendResponse from '../../app/utils/serverResponse';
-import catchValidation from '../../app/middlewares/validationResponse';
+import sendResponse from '../../utils/serverResponse';
+import catchValidation from '../../middlewares/validationResponse';
 import { AcademicSemesterServices } from './studentAcademicSemester.services';
 
 const createAcademicSemester: RequestHandler = async (req, res, next) => {

@@ -4,7 +4,6 @@ import {
   NameOftheSemester,
   SemesterCode,
 } from './studentAcademicSemester.constant';
-import { TAcademicSemesterName } from './studentAcademicSemester.interface';
 
 const createAcademicSemesterValidationSchema = z.object({
   body: z.object({
@@ -19,3 +18,4 @@ const createAcademicSemesterValidationSchema = z.object({
 export const createAcademicSemesterValidation = {
   createAcademicSemesterValidationSchema,
 };
+

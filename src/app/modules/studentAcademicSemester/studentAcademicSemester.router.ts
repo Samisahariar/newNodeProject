@@ -1,5 +1,5 @@
 import express from 'express';
-import catchValidation from '../../app/middlewares/validationResponse';
+import catchValidation from '../../middlewares/validationResponse';
 import { createAcademicSemesterValidation } from './studentAcademicSemester.validation';
 import { AcademicSemesterControllers } from './studentAcademicSemester.controller';
 

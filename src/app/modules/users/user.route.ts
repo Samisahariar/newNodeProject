@@ -1,7 +1,7 @@
 import { UserController } from './user.controller';
 import { Router } from 'express';
 import { studentValidations } from '../students/student.validationZod';
-import catchValidation from '../../app/middlewares/validationResponse';
+import catchValidation from '../../middlewares/validationResponse';
 
 const router = Router();
 

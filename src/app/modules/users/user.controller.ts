@@ -1,7 +1,7 @@
 import { userServices } from './user.services';
 import StudentsInterface from '../students/students.interface';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
-import sendResponse from '../../app/utils/serverResponse';
+import sendResponse from '../../utils/serverResponse';
 
 const createUser: RequestHandler = async (req, res, next) => {
   try {

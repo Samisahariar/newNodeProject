@@ -6,7 +6,7 @@ import StudentsInterface, {
   StudentModel,
 } from './students.interface';
 import validator from 'validator';
-import config from '../../app/config';
+import config from '../../config';
 
 const studentNameSchema = new Schema<StudentName>({
   firstName: {
