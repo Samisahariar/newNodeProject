@@ -1,13 +1,14 @@
-
-import { UserController } from "./user.controller";
-import { Router } from "express";
-import { studentValidations } from "../students/student.validationZod";
-import catchValidation from "../../app/middlewares/validationResponse";
+import { UserController } from './user.controller';
+import { Router } from 'express';
+import { studentValidations } from '../students/student.validationZod';
+import catchValidation from '../../app/middlewares/validationResponse';
 
 const router = Router();
 
+router.post(
+  '/create-student',
+  catchValidation(studentValidations.studentValidationSchema),
+  UserController.createUser,
+);
 
-
-router.post("/create-student",catchValidation(studentValidations.studentValidationSchema), UserController.createUser)
-
-export const UserRoute = router
+export const UserRoute = router;

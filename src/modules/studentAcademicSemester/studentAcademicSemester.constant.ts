@@ -1,5 +1,5 @@
 import {
-    TAcademicSemesterCode,
+  TAcademicSemesterCode,
   TAcademicSemesterName,
   TMonths,
 } from './studentAcademicSemester.interface';
@@ -19,10 +19,10 @@ export const MonthArray: TMonths[] = [
   'December',
 ];
 
-export const SemesterCode : TAcademicSemesterCode[] =  ['01', '02', '03']
+export const SemesterCode: TAcademicSemesterCode[] = ['01', '02', '03'];
 
-export const NameOftheSemester :TAcademicSemesterName[] = [
+export const NameOftheSemester: TAcademicSemesterName[] = [
   'Autumn',
   'Summer',
-  'Fall'
+  'Fall',
 ];

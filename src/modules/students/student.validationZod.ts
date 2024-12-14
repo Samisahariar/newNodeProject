@@ -49,8 +49,7 @@ const studentValidationSchema = z.object({
       gender: z.enum(['male', 'female'], {
         required_error: 'Gender is required',
       }),
-      dateofBirth: z
-        .date(),
+      dateofBirth: z.date(),
       email: z
         .string()
         .email('Invalid email address')
@@ -74,5 +73,3 @@ const studentValidationSchema = z.object({
 export const studentValidations = {
   studentValidationSchema,
 };
-
-

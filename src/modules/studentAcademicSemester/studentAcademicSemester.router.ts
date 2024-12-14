@@ -5,6 +5,12 @@ import { AcademicSemesterControllers } from './studentAcademicSemester.controlle
 
 const router = express.Router();
 
-router.post("/create-academic-semester",catchValidation(createAcademicSemesterValidation.createAcademicSemesterValidationSchema), AcademicSemesterControllers.createAcademicSemester)
+router.post(
+  '/create-academic-semester',
+  catchValidation(
+    createAcademicSemesterValidation.createAcademicSemesterValidationSchema,
+  ),
+  AcademicSemesterControllers.createAcademicSemester,
+);
 
-export const AcademicSemesterRouter = router
+export const AcademicSemesterRouter = router;

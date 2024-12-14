@@ -19,7 +19,6 @@ const getAllStudentCon = catchAsync(async (req, res, next) => {
   });
 });
 
-
 const getSingleStudentInfo = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
   const result = await studentServices.getSingleStudentInfo(id);

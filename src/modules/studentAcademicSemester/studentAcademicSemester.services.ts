@@ -1,14 +1,12 @@
-import TAcademicSemester from "./studentAcademicSemester.interface"
-import AcademicSemester from "./studentAcademicSemester.models"
+import TAcademicSemester from './studentAcademicSemester.interface';
+import AcademicSemester from './studentAcademicSemester.models';
 
-const createStudentSemesterintheDb = async( payload : TAcademicSemester) =>{
+const createStudentSemesterintheDb = async (payload: TAcademicSemester) => {
+  const result = await AcademicSemester.create(payload);
 
-    const result = await AcademicSemester.create(payload);
-    
-    return result
-
-}
+  return result;
+};
 
 export const AcademicSemesterServices = {
-    createStudentSemesterintheDb
-}
+  createStudentSemesterintheDb,
+};

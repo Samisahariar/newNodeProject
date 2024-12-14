@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from "express";
-import { AnyZodObject } from "zod";
+import { NextFunction, Request, Response } from 'express';
+import { AnyZodObject } from 'zod';
 
 const catchValidation = (schema: AnyZodObject) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -14,4 +14,4 @@ const catchValidation = (schema: AnyZodObject) => {
   };
 };
 
-export default catchValidation
+export default catchValidation;

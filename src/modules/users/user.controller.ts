@@ -3,7 +3,6 @@ import StudentsInterface from '../students/students.interface';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import sendResponse from '../../app/utils/serverResponse';
 
-
 const createUser: RequestHandler = async (req, res, next) => {
   try {
     const { password, student } = req.body;

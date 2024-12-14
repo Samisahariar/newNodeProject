@@ -8,6 +8,4 @@ export type TUser = {
   isDeleted: boolean;
 };
 
-
-
 export default TUser;

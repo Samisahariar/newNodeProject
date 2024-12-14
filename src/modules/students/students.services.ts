@@ -1,7 +1,5 @@
-import TStudentModel from "./students.model";
+import TStudentModel from './students.model';
 import { error } from 'console';
-
-
 
 const getAlltheStudents = async () => {
   const result = await TStudentModel.find();
