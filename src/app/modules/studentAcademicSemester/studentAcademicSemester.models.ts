@@ -5,6 +5,7 @@ import {
   NameOftheSemester,
   SemesterCode,
 } from './studentAcademicSemester.constant';
+import { NextFunction } from 'express';
 
 const academicSemesterSchema = new Schema<TAcademicSemester>(
   {
@@ -36,7 +37,18 @@ const academicSemesterSchema = new Schema<TAcademicSemester>(
   },
 );
 
-const AcademicSemester = model<TAcademicSemester>(
+academicSemesterSchema.pre('save', async function (next) {
+  const issemesterExists = await AcademicSemester.findOne({
+    name: this.name,
+    year: this.year,
+  });
+  if (issemesterExists) {
+    throw new Error('the semester is already exists in the database !');
+  }
+  next();
+});
+
+export const AcademicSemester = model<TAcademicSemester>(
   'AcademicSemester',
   academicSemesterSchema,
 );
