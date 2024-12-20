@@ -9,10 +9,9 @@ app.use(cors());
 
 app.use('/api', router);
 
-/* app.use(((err: any, req: Request, res: Response, next: NextFunction) => {
-
+app.use(((err: any, req: Request, res: Response, next: NextFunction) => {
   const statusCode = err.status || 500;
-  const message = 'something went worng in the app.ts!';
+  const message = err.message;
   res.status(statusCode).json({
     success: false,
     message,
@@ -20,7 +19,7 @@ app.use('/api', router);
   });
 }));
 
- */const test = (req: Request, res: Response) => {
+ const test = (req: Request, res: Response) => {
   res.send('the appp is runnig on and on still now !');
 };
 app.get('/', test);
