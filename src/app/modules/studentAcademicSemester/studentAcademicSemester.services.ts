@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import TAcademicSemester from './studentAcademicSemester.interface';
 import AcademicSemester from './studentAcademicSemester.models';
 
@@ -16,21 +17,30 @@ const createStudentSemesterintheDb = async (payload: TAcademicSemester) => {
     throw new Error('Invalid Semester Code !!');
   }
   const result = await AcademicSemester.create(payload);
-
   return result;
 };
 
+const getAlltheSemester = async (querys: Record<string, string>) => {
+
+  const filters: Record<string, string> = { ...querys };
+
+  const query: Record<string, { $regex: string; $options: string }> = {};
+  Object.keys(filters).forEach((key: string) => {
+    query[key] = { $regex: filters[key], $options: 'i' };
+  });
+
+  const result = await AcademicSemester.find(query);
+  return result;
+};
 
 const getTheSingleSemester = async (id: string) => {
-  console.log(
-    `this is the get id of the academic semester and the id is ${id}`,
-  );
-
-  /*  const theSingleAcademicSemester = await AcademicSemester.findOne(ob) */
-
+  const objectId = new mongoose.Types.ObjectId(id);
+  const theSingleAcademicSemester = await AcademicSemester.findOne(objectId);
+  return theSingleAcademicSemester;
 };
 
 export const AcademicSemesterServices = {
   createStudentSemesterintheDb,
+  getAlltheSemester,
   getTheSingleSemester,
 };

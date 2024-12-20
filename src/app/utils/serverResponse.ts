@@ -10,6 +10,7 @@ type dataType<T> = {
 const sendResponse = <T>(res: Response, data: dataType<T>) => {
   res.status(data?.status).json({
     success: data.success,
+    status : data.status,
     message: data.message,
     data: data.data,
   });
