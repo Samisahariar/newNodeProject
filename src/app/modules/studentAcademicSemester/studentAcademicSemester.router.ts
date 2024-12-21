@@ -15,6 +15,8 @@ router.post(
 
 router.get('/:id', AcademicSemesterControllers.getTheSingleSemesterController);
 
+router.post('/:id', AcademicSemesterControllers.updateTheSingleSemester);
+
 router.get("/", AcademicSemesterControllers.getAllTheSemester)
 
 

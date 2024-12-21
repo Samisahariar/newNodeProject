@@ -57,7 +57,7 @@ const getAllTheSemester: RequestHandler = async (req, res, next) => {
         query[key] = value;
       }
     });
-    const result = await AcademicSemesterServices.getAlltheSemester(query)
+    const result = await AcademicSemesterServices.getAlltheSemester(query);
     sendResponse(res, {
       success: true,
       status: 200,
@@ -69,8 +69,37 @@ const getAllTheSemester: RequestHandler = async (req, res, next) => {
   }
 };
 
+
+
+
+
+const updateTheSingleSemester: RequestHandler = async (req, res, next) => {
+  try {
+    const toUpdate = req.body;
+    const { id } = req.params;
+
+    const result = await AcademicSemesterServices.updateASingleSemester(
+      id,
+      toUpdate,
+    );
+    sendResponse(res, {
+      success: true,
+      status: 200,
+      message: 'Data is received succesfully !',
+      data: result,
+    });
+  } catch (error) {
+    next(error)
+  }
+};
+
+
+
+
+
 export const AcademicSemesterControllers = {
   createAcademicSemester,
   getTheSingleSemesterController,
   getAllTheSemester,
+  updateTheSingleSemester
 };

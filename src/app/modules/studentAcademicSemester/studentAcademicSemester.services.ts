@@ -21,7 +21,6 @@ const createStudentSemesterintheDb = async (payload: TAcademicSemester) => {
 };
 
 const getAlltheSemester = async (querys: Record<string, string>) => {
-
   const filters: Record<string, string> = { ...querys };
 
   const query: Record<string, { $regex: string; $options: string }> = {};
@@ -39,8 +38,29 @@ const getTheSingleSemester = async (id: string) => {
   return theSingleAcademicSemester;
 };
 
+
+
+
+
+const updateASingleSemester = async (id: string, toUpdate: object) => {
+  const objectId = new mongoose.Types.ObjectId(id);
+  const result = await AcademicSemester.updateOne(
+    { _id: objectId },
+    { ...toUpdate, updated_at: new Date() },
+  );
+  if (result.modifiedCount === 1) {
+    const result2 = await AcademicSemester.aggregate([{ $match: { _id: objectId } }]);
+    return result2;
+  }
+};
+
+
+
+
+
 export const AcademicSemesterServices = {
   createStudentSemesterintheDb,
   getAlltheSemester,
   getTheSingleSemester,
+  updateASingleSemester
 };
