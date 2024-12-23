@@ -63,6 +63,7 @@ export type StudentsInterface = {
   presentAdd: string;
   bloodGroup: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
   contactNo: string;
+  academicSemester : Types.ObjectId
   emergencyContactNo: string;
   localGuardian: LocalGuardian;
   guardian: Guardian;

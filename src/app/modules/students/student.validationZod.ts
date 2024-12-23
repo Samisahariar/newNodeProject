@@ -65,6 +65,7 @@ const studentValidationSchema = z.object({
         .min(1, 'Emergency contact number is required'),
       localGuardian: localGuardianSchema,
       guardian: guardianSchema,
+      academicSemester : z.string(),
       profileImg: z.string().min(1, 'Profile image is required'),
     }),
   }),

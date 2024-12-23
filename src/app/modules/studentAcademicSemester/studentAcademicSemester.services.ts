@@ -20,6 +20,11 @@ const createStudentSemesterintheDb = async (payload: TAcademicSemester) => {
   return result;
 };
 
+
+
+
+
+
 const getAlltheSemester = async (querys: Record<string, string>) => {
   const filters: Record<string, string> = { ...querys };
 
@@ -31,6 +36,9 @@ const getAlltheSemester = async (querys: Record<string, string>) => {
   const result = await AcademicSemester.find(query);
   return result;
 };
+
+
+
 
 const getTheSingleSemester = async (id: string) => {
   const objectId = new mongoose.Types.ObjectId(id);

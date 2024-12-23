@@ -1,4 +1,4 @@
-import { Model, Schema, Types, model } from 'mongoose';
+import mongoose, { Model, Schema, Types, model } from 'mongoose';
 import StudentsInterface, {
   LocalGuardian,
   Guardian,
@@ -7,6 +7,7 @@ import StudentsInterface, {
 } from './students.interface';
 import validator from 'validator';
 import config from '../../config';
+import AcademicSemester from '../studentAcademicSemester/studentAcademicSemester.models';
 
 const studentNameSchema = new Schema<StudentName>({
   firstName: {
@@ -132,6 +133,10 @@ const studentSchema = new Schema<StudentsInterface, StudentModel>({
     type: String,
     required: true,
   },
+  academicSemester : {
+    type : Schema.Types.ObjectId,
+    ref : "AcademicSemester"
+  },
   localGuardian: {
     type: localGuardianSchema,
     required: [true, 'Local guardian information is required'],
@@ -153,6 +158,9 @@ const studentSchema = new Schema<StudentsInterface, StudentModel>({
 } */
 
 //static method is declared down below and a fuck all of this !!
+
+
+
 studentSchema.statics.isExistsStudent = async (id: string) => {
   const result = await TStudentModel.findOne({ id });
   return result;
