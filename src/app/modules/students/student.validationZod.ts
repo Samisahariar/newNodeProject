@@ -42,14 +42,11 @@ const studentValidationSchema = z.object({
       .string()
       .min(4, 'the password should have atleast 4 character !'),
     student: z.object({
-      id: z.string().min(1, 'Student ID is required'),
-      password: z.string().max(20).optional(),
-      user: z.string().min(1, 'User reference is required'),
       name: studentNameSchema,
       gender: z.enum(['male', 'female'], {
         required_error: 'Gender is required',
       }),
-      dateofBirth: z.date(),
+      dateofBirth: z.string(),
       email: z
         .string()
         .email('Invalid email address')

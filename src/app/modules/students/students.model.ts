@@ -1,13 +1,13 @@
 import mongoose, { Model, Schema, Types, model } from 'mongoose';
-import StudentsInterface, {
+import {
   LocalGuardian,
   Guardian,
   StudentName,
   StudentModel,
 } from './students.interface';
 import validator from 'validator';
-import config from '../../config';
-import AcademicSemester from '../studentAcademicSemester/studentAcademicSemester.models';
+import { StudentsInterface } from './students.interface';
+
 
 const studentNameSchema = new Schema<StudentName>({
   firstName: {
@@ -82,7 +82,7 @@ const guardianSchema = new Schema<Guardian>({
 const studentSchema = new Schema<StudentsInterface, StudentModel>({
   id: {
     type: String,
-    required: [true, 'Student ID is required'],
+    required: [true, 'ID is required']
   },
   user: {
     type: Schema.Types.ObjectId,

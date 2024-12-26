@@ -9,6 +9,8 @@ app.use(cors());
 
 app.use('/api', router);
 
+
+
 app.use(((err: any, req: Request, res: Response, next: NextFunction) => {
   const statusCode = err.status || 500;
   const message = err.message;
@@ -19,9 +21,12 @@ app.use(((err: any, req: Request, res: Response, next: NextFunction) => {
   });
 }));
 
- const test = (req: Request, res: Response) => {
+
+const test = (req: Request, res: Response) => {
   res.send('the appp is runnig on and on still now !');
 };
 app.get('/', test);
 
 export default app;
+
+
