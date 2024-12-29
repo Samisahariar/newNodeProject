@@ -1,11 +1,11 @@
 import { RequestHandler } from 'express';
 import sendResponse from '../../utils/serverResponse';
-import catchValidation from '../../middlewares/validationResponse';
-import { AcademicSemesterServices } from './studentAcademicSemester.services';
+import { AcademicFacultyServices } from './academicFaculty.service';
+
 
 const createAcademicSemester: RequestHandler = async (req, res, next) => {
   try {
-    const result = await AcademicSemesterServices.createStudentSemesterintheDb(
+    const result = await AcademicFacultyServices.createStudentSemesterintheDb(
       req.body,
     );
     sendResponse(res, {
@@ -32,7 +32,7 @@ const getTheSingleSemesterController: RequestHandler = async (
   try {
     const { id } = req.params;
     console.log(id);
-    const result = await AcademicSemesterServices.getTheSingleSemester(
+    const result = await AcademicFacultyServices.getTheSingleFaculty(
       id as string,
     );
     sendResponse(res, {
@@ -56,7 +56,7 @@ const getAllTheSemester: RequestHandler = async (req, res, next) => {
         query[key] = value;
       }
     });
-    const result = await AcademicSemesterServices.getAlltheSemester(query);
+    const result = await AcademicFacultyServices.getAlltheFaculty(query);
     sendResponse(res, {
       success: true,
       status: 200,
@@ -70,14 +70,12 @@ const getAllTheSemester: RequestHandler = async (req, res, next) => {
 
 
 
-
-
 const updateTheSingleSemester: RequestHandler = async (req, res, next) => {
   try {
     const toUpdate = req.body;
     const { id } = req.params;
 
-    const result = await AcademicSemesterServices.updateASingleSemester(
+    const result = await AcademicFacultyServices.updateASingleFaculty(
       id,
       toUpdate,
     );
@@ -93,10 +91,7 @@ const updateTheSingleSemester: RequestHandler = async (req, res, next) => {
 };
 
 
-
-
-
-export const AcademicSemesterControllers = {
+export const AcademicFacultyServicesdemicSemesterControllers = {
   createAcademicSemester,
   getTheSingleSemesterController,
   getAllTheSemester,
