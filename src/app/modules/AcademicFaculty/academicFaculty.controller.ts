@@ -91,7 +91,7 @@ const updateTheSingleFaculty: RequestHandler = async (req, res, next) => {
 };
 
 
-export const AcademicFacultyServicesdemicFacultyControllers = {
+export const AcademicFacultyControllers = {
   createAcademicFaculty,
   getTheSingleFacultyController,
   getAllTheFaculty,
