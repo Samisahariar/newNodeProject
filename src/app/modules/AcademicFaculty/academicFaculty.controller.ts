@@ -15,11 +15,6 @@ const createAcademicFaculty: RequestHandler = async (req, res, next) => {
       data: result,
     });
   } catch (err: any) {
-    /* res.status(401).json({
-        success: false,
-        message: err.message || 'something worng ins this secviton',
-        error: err,
-      }); */
     next(err);
   }
 };

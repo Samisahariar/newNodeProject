@@ -3,6 +3,7 @@ import { StudentRouters } from '../modules/students/students.routers';
 import { UserRoute } from '../modules/users/user.route';
 import app from '../../app';
 import { AcademicSemesterRouter } from '../modules/studentAcademicSemester/studentAcademicSemester.router';
+import { AcademicFacultyRouter } from '../modules/AcademicFaculty/academicFaculty.router';
 
 const router = Router();
 
@@ -19,6 +20,10 @@ const allthemoduleRoutes = [
     path: '/academicSemester',
     route: AcademicSemesterRouter,
   },
+  {
+    path : "/academicFaculty",
+    route : AcademicFacultyRouter
+  }
 ];
 
 allthemoduleRoutes.forEach((route) => router.use(route.path, route.route));
