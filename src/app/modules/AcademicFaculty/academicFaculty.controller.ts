@@ -3,9 +3,9 @@ import sendResponse from '../../utils/serverResponse';
 import { AcademicFacultyServices } from './academicFaculty.service';
 
 
-const createAcademicSemester: RequestHandler = async (req, res, next) => {
+const createAcademicFaculty: RequestHandler = async (req, res, next) => {
   try {
-    const result = await AcademicFacultyServices.createStudentSemesterintheDb(
+    const result = await AcademicFacultyServices.createStudentFacultyintheDb(
       req.body,
     );
     sendResponse(res, {
@@ -24,7 +24,7 @@ const createAcademicSemester: RequestHandler = async (req, res, next) => {
   }
 };
 
-const getTheSingleSemesterController: RequestHandler = async (
+const getTheSingleFacultyController: RequestHandler = async (
   req,
   res,
   next,
@@ -47,7 +47,7 @@ const getTheSingleSemesterController: RequestHandler = async (
   }
 };
 
-const getAllTheSemester: RequestHandler = async (req, res, next) => {
+const getAllTheFaculty: RequestHandler = async (req, res, next) => {
   try {
     const query: Record<string, string> = {};
     Object.keys(req.query).forEach((key) => {
@@ -70,7 +70,7 @@ const getAllTheSemester: RequestHandler = async (req, res, next) => {
 
 
 
-const updateTheSingleSemester: RequestHandler = async (req, res, next) => {
+const updateTheSingleFaculty: RequestHandler = async (req, res, next) => {
   try {
     const toUpdate = req.body;
     const { id } = req.params;
@@ -91,9 +91,9 @@ const updateTheSingleSemester: RequestHandler = async (req, res, next) => {
 };
 
 
-export const AcademicFacultyServicesdemicSemesterControllers = {
-  createAcademicSemester,
-  getTheSingleSemesterController,
-  getAllTheSemester,
-  updateTheSingleSemester
+export const AcademicFacultyServicesdemicFacultyControllers = {
+  createAcademicFaculty,
+  getTheSingleFacultyController,
+  getAllTheFaculty,
+  updateTheSingleFaculty
 };
