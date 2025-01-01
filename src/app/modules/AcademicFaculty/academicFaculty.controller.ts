@@ -19,6 +19,9 @@ const createAcademicFaculty: RequestHandler = async (req, res, next) => {
   }
 };
 
+
+
+
 const getTheSingleFacultyController: RequestHandler = async (
   req,
   res,
