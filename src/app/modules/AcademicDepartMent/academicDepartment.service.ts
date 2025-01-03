@@ -9,15 +9,16 @@ const createDepartmentIntoDB = async (payload: TAcademicDepartment) => {
 };
 
 const getAlltheDepartment = async (querys: Record<string, string>) => {
+  
   const filters: Record<string, string> = { ...querys };
 
   const query: Record<string, { $regex: string; $options: string }> = {};
   Object.keys(filters).forEach((key: string) => {
     query[key] = { $regex: filters[key], $options: 'i' };
   });
-
-  const result = await AcademicDepartment.find(query);
+  const result = await AcademicDepartment.find(query).populate("academicFaculty");
   return result;
+
 };
 
 const getTheSingleDepartment = async (id: string) => {
