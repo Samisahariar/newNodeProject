@@ -5,6 +5,7 @@ import { AcademicSemesterRouter } from '../modules/studentAcademicSemester/stude
 import { AcademicFacultyRouter } from '../modules/AcademicFaculty/academicFaculty.router';
 import { AcademicDepartmentRouter } from '../modules/AcademicDepartMent/acedemicDepartment.router';
 
+
 const router = Router();
 
 const allthemoduleRoutes = [

@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
 import sendResponse from '../../utils/serverResponse';
 import { AcademicDepartmentServices } from './academicDepartment.service';
+import AcademicDepartment from './academicDepartment.model';
 
 
 const createAcademicDepartment: RequestHandler = async (req, res, next) => {
@@ -58,7 +59,7 @@ const getAllTheDepartment: RequestHandler = async (req, res, next) => {
     sendResponse(res, {
       success: true,
       status: 200,
-      message: 'data is recevies successfully !!',
+      message: 'All the department is received successfully !!',
       data: result,
     });
   } catch (error: any) {
