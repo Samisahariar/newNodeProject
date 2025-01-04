@@ -1,8 +1,14 @@
 import TStudentModel from './students.model';
-import { error } from 'console';
 
 const getAlltheStudents = async () => {
-  const result = await TStudentModel.find();
+  const result = await TStudentModel.find()
+    .populate('academicSemester')
+    .populate({
+      path: 'academicDepartment',
+      populate: {
+        path: 'academicFaculty',
+      }
+    });
   return result;
 };
 

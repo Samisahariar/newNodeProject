@@ -10,24 +10,36 @@ const catchAsync = (fn: RequestHandler) => {
 };
 
 const getAllStudentCon = catchAsync(async (req, res, next) => {
-  const result = await studentServices.getAlltheStudents();
-  sendResponse(res, {
-    success: true,
-    message: 'data is received successfully !',
-    data: result,
-    status: 200,
-  });
+  try {
+    const result = await studentServices.getAlltheStudents();
+    sendResponse(res, {
+      success: true,
+      message: 'data is received successfully !',
+      data: result,
+      status: 200,
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
-const getSingleStudentInfo = catchAsync(async (req: Request, res: Response) => {
-  const id = req.params.id;
-  const result = await studentServices.getSingleStudentInfo(id);
-  res.status(200).json({
-    success: true,
-    message: 'the singledata is succesfully rethrived !!',
-    data: result,
-  });
-});
+const getSingleStudentInfo = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const id = req.params.id;
+    const result = await studentServices.getSingleStudentInfo(id);
+    res.status(200).json({
+      success: true,
+      message: 'the singledata is fucked up!!',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const studentController = {
   getAllStudentCon,

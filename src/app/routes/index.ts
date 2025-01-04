@@ -25,7 +25,6 @@ const allthemoduleRoutes = [
     path : "/academicFaculty",
     route : AcademicFacultyRouter
   },
-  
   {
     path : "/academicDepartment",
     route : AcademicDepartmentRouter

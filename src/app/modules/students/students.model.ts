@@ -8,7 +8,6 @@ import {
 import validator from 'validator';
 import { StudentsInterface } from './students.interface';
 
-
 const studentNameSchema = new Schema<StudentName>({
   firstName: {
     trim: true,
@@ -82,28 +81,33 @@ const guardianSchema = new Schema<Guardian>({
 const studentSchema = new Schema<StudentsInterface, StudentModel>({
   id: {
     type: String,
-    required: [true, 'ID is required']
+    required: [true, 'ID is required'],
   },
+
   user: {
     type: Schema.Types.ObjectId,
     required: [true, 'this field is required for the futher user and write !'],
     unique: true,
     ref: 'UserModel',
   },
+
   name: {
     type: studentNameSchema,
     required: [true, 'Name is required'],
   },
+
   gender: {
     type: String,
     enum: ['male', 'female'],
     required: [true, 'Gender is required'],
   },
+
   dateofBirth: {
     type: String,
     required: [true, 'Date of birth is required'],
     max: 20,
   },
+
   email: {
     type: String,
     required: [true, 'Email is required'],
@@ -112,43 +116,58 @@ const studentSchema = new Schema<StudentsInterface, StudentModel>({
       message: '{VALUE} is not a perfect email !!',
     },
   },
+
   permanentAdd: {
     type: String,
     required: [true, 'Permanent address is required'],
   },
+
   presentAdd: {
     type: String,
     required: [true, 'Present address is required'],
   },
+
   bloodGroup: {
     type: String,
     enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
     required: [true, 'Blood group is required'],
   },
+
   contactNo: {
     type: String,
     required: [true, 'Contact number is required'],
   },
+
   emergencyContactNo: {
     type: String,
     required: true,
   },
-  academicSemester : {
-    type : Schema.Types.ObjectId,
-    ref : "AcademicSemester"
+
+  academicSemester: {
+    type: Schema.Types.ObjectId,
+    ref: 'AcademicSemester',
   },
+
+  academicDepartment: {
+    type: Schema.Types.ObjectId,
+    ref: 'AcademicDepartment',
+  },
+
   localGuardian: {
     type: localGuardianSchema,
     required: [true, 'Local guardian information is required'],
   },
+
   guardian: {
     type: guardianSchema,
     required: [true, 'Guardian information is required'],
   },
+
   profileImg: {
     type: String,
     required: true,
-  },
+  }
+
 });
 
 //instance method are used here forr all the time
@@ -158,8 +177,6 @@ const studentSchema = new Schema<StudentsInterface, StudentModel>({
 } */
 
 //static method is declared down below and a fuck all of this !!
-
-
 
 studentSchema.statics.isExistsStudent = async (id: string) => {
   const result = await TStudentModel.findOne({ id });

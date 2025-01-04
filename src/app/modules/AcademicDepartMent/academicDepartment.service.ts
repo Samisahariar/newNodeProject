@@ -8,6 +8,7 @@ const createDepartmentIntoDB = async (payload: TAcademicDepartment) => {
   return result;
 };
 
+
 const getAlltheDepartment = async (querys: Record<string, string>) => {
   
   const filters: Record<string, string> = { ...querys };
@@ -21,9 +22,10 @@ const getAlltheDepartment = async (querys: Record<string, string>) => {
 
 };
 
+
 const getTheSingleDepartment = async (id: string) => {
   const objectId = new mongoose.Types.ObjectId(id);
-  const theSingleAcademicFaculty = await AcademicDepartment.findOne(objectId);
+  const theSingleAcademicFaculty = await AcademicDepartment.findOne(objectId) ;
   return theSingleAcademicFaculty;
 };
 
