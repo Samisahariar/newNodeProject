@@ -9,6 +9,7 @@ const catchAsync = (fn: RequestHandler) => {
   };
 };
 
+
 const getAllStudentCon = catchAsync(async (req, res, next) => {
   try {
     const result = await studentServices.getAlltheStudents();
@@ -22,6 +23,7 @@ const getAllStudentCon = catchAsync(async (req, res, next) => {
     next(error);
   }
 });
+
 
 const getSingleStudentInfo = async (
   req: Request,
@@ -40,6 +42,7 @@ const getSingleStudentInfo = async (
     next(error);
   }
 };
+
 
 export const studentController = {
   getAllStudentCon,
