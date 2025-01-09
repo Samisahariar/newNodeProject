@@ -46,8 +46,8 @@ const createStudentIntoDb = async (
     const newUser = await UserModel.create([userData], { session });
 
     if (!newUser.length) {
-      throw new AppError(, 'Failed to create user');
-    }
+      throw new AppError(401, 'Failed to create user');
+    };
 
     if (Object.keys(newUser).length) {
       // set id , _id as user
