@@ -10,6 +10,8 @@ import TStudentModel from '../students/students.model';
 import TAcademicSemester from '../studentAcademicSemester/studentAcademicSemester.interface';
 import AcademicSemester from '../studentAcademicSemester/studentAcademicSemester.models';
 import generatedStudentId from './user.utils';
+import mongoose from 'mongoose';
+import AppError from '../errors/AppError';
 
 const createStudentIntoDb = async (
   password: string,
@@ -20,12 +22,11 @@ const createStudentIntoDb = async (
   /* if (await TStudentModel.isExistsStudent(String(studentdata.id))) {
     throw Error('the use is already exists in this database !!!');
   } else { */
+
   const userData: Partial<TUser> = {};
 
-  //if password is not given , use deafult password
   userData.password = password || (config.default_password as string);
 
-  //set student role
   userData.role = 'student';
 
   // find academic semester info
@@ -33,21 +34,44 @@ const createStudentIntoDb = async (
     payload.academicSemester,
   );
 
+  const session = await mongoose.startSession();
+
+  try {
+    session.startTransaction();
+
+    userData.id = await generatedStudentId(
+      admissionSemester as TAcademicSemester,
+    );
+
+    const newUser = await UserModel.create([userData], { session });
+
+    if (!newUser.length) {
+      throw new AppError(, 'Failed to create user');
+    }
+
+    if (Object.keys(newUser).length) {
+      // set id , _id as user
+
+      const newStudent = await TStudentModel.create(payload);
+      return newStudent;
+    }
+
+
+    payload.id = newUser[0].id;
+    payload.user = newUser[0]._id; //reference _id
+
+
+  } catch (error) {}
+
+  //if password is not given , use deafult password
+
+  //set student role
+
   //set  generated id
-  userData.id = await generatedStudentId(admissionSemester as TAcademicSemester);
 
   // create a user
-  const newUser = await UserModel.create(userData);
 
   //create a student
-  if (Object.keys(newUser).length) {
-    // set id , _id as user
-    payload.id = newUser.id;
-    payload.user = newUser._id; //reference _id
-
-    const newStudent = await TStudentModel.create(payload);
-    return newStudent;
-  }
 };
 
 export const userServices = {
