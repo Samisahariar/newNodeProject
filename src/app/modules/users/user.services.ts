@@ -12,6 +12,7 @@ import AcademicSemester from '../studentAcademicSemester/studentAcademicSemester
 import generatedStudentId from './user.utils';
 import mongoose from 'mongoose';
 import AppError from '../errors/AppError';
+import { threadId } from 'worker_threads';
 
 const createStudentIntoDb = async (
   password: string,
@@ -47,21 +48,31 @@ const createStudentIntoDb = async (
 
     if (!newUser.length) {
       throw new AppError(401, 'Failed to create user');
-    };
+    }
 
-    if (Object.keys(newUser).length) {
-      // set id , _id as user
+    payload.id = newUser[0].id;
+    payload.user = newUser[0]._id;
 
-      const newStudent = await TStudentModel.create(payload);
-      return newStudent;
+
+    const newStudent = await TStudentModel.create([payload], { session });
+
+    if (!newStudent.length) {
+      throw new AppError(401, 'Failed to create new Student !');
     }
 
 
-    payload.id = newUser[0].id;
-    payload.user = newUser[0]._id; //reference _id
+    await session.commitTransaction();
+    await session.endSession()
 
 
-  } catch (error) {}
+    return newStudent;
+  } catch (error) {
+    
+    await session.abortTransaction()
+    await session.endSession()
+
+    throw new Error ("Failed to create student !! ")
+  }
 
   //if password is not given , use deafult password
 
