@@ -12,6 +12,14 @@ const getAlltheStudents = async () => {
   return result;
 };
 
+
+const deleterSingleStudentServices = async(id : string) =>{
+
+}
+
+
+
+
 const getSingleStudentInfo = async (id: string) => {
   
   const isTheStudentExists = await TStudentModel.findOne({ id });
@@ -27,4 +35,5 @@ const getSingleStudentInfo = async (id: string) => {
 export const studentServices = {
   getAlltheStudents,
   getSingleStudentInfo,
+  deleterSingleStudentServices
 };

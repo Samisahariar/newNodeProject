@@ -7,6 +7,7 @@ import {
 } from './students.interface';
 import validator from 'validator';
 import { StudentsInterface } from './students.interface';
+import { optional } from 'zod';
 
 const studentNameSchema = new Schema<StudentName>({
   firstName: {
@@ -161,6 +162,12 @@ const studentSchema = new Schema<StudentsInterface, StudentModel>({
   guardian: {
     type: guardianSchema,
     required: [true, 'Guardian information is required'],
+  },
+
+  
+  isDeleted : {
+    type : Boolean,
+    default : false
   },
 
   profileImg: {

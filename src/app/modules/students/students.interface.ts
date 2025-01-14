@@ -68,6 +68,7 @@ export type StudentsInterface = {
   emergencyContactNo: string;
   localGuardian: LocalGuardian;
   guardian: Guardian;
+  isDeleted?: string; 
   profileImg?: string;
 };
 //instance method are all of these and we are work here for that reason !!

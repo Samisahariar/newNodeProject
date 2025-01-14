@@ -2,12 +2,24 @@ import { Request, RequestHandler, Response } from 'express';
 import { studentServices } from './students.services';
 import sendResponse from '../../utils/serverResponse';
 import { NextFunction } from 'express-serve-static-core';
+import { stderr } from 'process';
 
 const catchAsync = (fn: RequestHandler) => {
   return (req: Request, res: Response, next: NextFunction) => {
     Promise.resolve(fn(req, res, next)).catch((error) => next(error));
   };
 };
+
+const deleterSingleStudentController = catchAsync(async(req, res, next) =>{
+  try{
+
+
+  }catch(error){
+
+  }
+})
+
+
 
 
 const getAllStudentCon = catchAsync(async (req, res, next) => {
@@ -47,4 +59,5 @@ const getSingleStudentInfo = async (
 export const studentController = {
   getAllStudentCon,
   getSingleStudentInfo,
+  deleterSingleStudentController
 };
